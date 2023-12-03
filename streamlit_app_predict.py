@@ -58,7 +58,7 @@ def load_image():
         cv2.imwrite("main_image.jpg", opencv_image_resz)
         st.image("main_image.jpg", caption="svd_image")
        
-    return path, opencv_image_resz
+    return path, opencv_image
        
 
 
