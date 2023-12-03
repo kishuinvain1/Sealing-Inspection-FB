@@ -97,29 +97,19 @@ def predict(model, url):
 	
 	
 def main():
-    st.title('Tyre Classification')
-    option = st.selectbox('Choose Model', ('ktm-rc-200', 'ktm-duke-250'))
+    st.title('Clip Checking')
 
     image, svd_img = load_image()
 
-    url = st.text_input("URL:")
-    st.write('url is:', url)
-
     result = st.button('Detect')
-    seal_bear = False
-    nok_flag = False
+
     if result:
-        #results = predict(model, svd_img)
-        #results = predict(model2, url)
-        results = curl_command(url)
-        print("Prediction Results are...")	
-        print(results)
+        results = predict(model, svd_img)
         if len(results['predictions']) == 0:
             st.image(svd_img)
-            st.write("No Tyre Detected")
+            st.write("No Part Detected")
         else:
             st.write('DETECTION RESULTS')
-           
             svd_img = cv2.cvtColor(svd_img,cv2.COLOR_BGR2RGB)
             for cnt,item in enumerate(results['predictions']):
                 #new_img_pth = results['predictions'][0]['image_path']
@@ -129,95 +119,11 @@ def main():
                 h = results['predictions'][cnt]['height']
                 cl = results['predictions'][cnt]['class']
                 cnf = results['predictions'][cnt]['confidence']
-                if 'bearing' in cl:
-                    cl = cl + " & seal"
-                    seal_bear = True
-                elif 'seal' in cl:
-                    continue    
                 svd_img = drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
-                if not (option in cl):
-                    nok_flag = True
-                    break
-
-            if nok_flag:
-                st.write("*Wheel's Model is not ", option ) 
-                return   
+                
 
             st.image(svd_img, caption='Resulting Image') 
 
-            #Tyre-Type
-            if "ktm-rc-200-rw" in cl:
-                st.write('*KTM RC 200 REAR-WHEEL')   
-            elif "ktm-rc-200-fw" in cl:
-                st.write('*KTM RC 200 FRONT-WHEEL') 
-            elif "ktm-duke-250-rw" in cl:
-                st.write('*KTM DUKE 250 REAR-WHEEL')
-            elif "ktm-duke-250-fw" in cl:
-                st.write('*KTM DUKE 250 FRONT-WHEEL') 
-
-
-            #Company Name
-            st.write('*Mfr: MRF')
-
-            #Size
-            if "ktm-rc-200-rw" in cl:
-                st.write('*Size: 150/60 R17')   
-            elif "ktm-rc-200-fw" in cl:
-                st.write('*Size: 110/70 R17') 
-            elif "ktm-duke-250-rw" in cl:
-                st.write('*Size: 150/60 ZR17')
-            elif "ktm-duke-250-fw" in cl:
-                st.write('*Size: 110/70 ZR17') 
-
-
-            #Rim Specs
-            if "ktm-rc-200-rw" in cl:
-                st.write('*Rim: Black Colored')   
-            elif "ktm-rc-200-fw" in cl:
-                st.write('*Rim: Black Colored') 
-            elif "ktm-duke-250-rw" in cl:
-                st.write('*Rim: Saffron Colored')
-            elif "ktm-duke-250-fw" in cl:
-                st.write('*Rim: Saffron Colored')  
-
-
-            #Disc Brake Specs
-            if "ktm-rc-200-rw" in cl:
-                st.write('*Disc Brake: 5 Bolts')   
-            elif "ktm-rc-200-fw" in cl:
-                st.write('*Disc Brake: 5 Bolts') 
-            elif "ktm-duke-250-rw" in cl:
-                st.write('*Disc Brake: 5 Bolts')
-            elif "ktm-duke-250-fw" in cl:
-                st.write('*Disc Brake: 5 Bolts')   
-
-
-            #Sensor Disc Specs
-            if "ktm-rc-200-rw" in cl:
-                st.write('*Sensor Disc: 5 Bolts, Black Colored')   
-            elif "ktm-rc-200-fw" in cl:
-                st.write('*Sensor Disc: 5 Bolts, Black Colored') 
-            elif "ktm-duke-250-rw" in cl:
-                st.write('*Sensor Disc: 5 Bolts, Black Colored')
-            elif "ktm-duke-250-fw" in cl:
-                st.write('*Sensor Disc: 5 Bolts, Black Colored')   
-
-
-            #Seal & Bearing Sepcs
-            if "ktm-rc-200-rw" in cl and seal_bear:
-                st.write('*Seal & Bearing: Present')   
-            elif "ktm-rc-200-fw" in cl and seal_bear:
-                st.write('*Seal & Bearing: Present') 
-            elif "ktm-duke-250-rw" in cl and seal_bear:
-                st.write('*Seal & Bearing: Present')
-            elif "ktm-duke-250-fw" in cl and seal_bear:
-                st.write('*Seal & Bearing: Present')           
-
-            
-                     
-
-
            
-
 if __name__ == '__main__':
     main()
