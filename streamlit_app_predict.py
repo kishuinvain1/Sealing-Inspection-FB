@@ -102,6 +102,9 @@ def predict(model, url):
 	
 def main():
     st.title('Clip Checking')
+    rf = Roboflow(api_key="FFCwPN6Fvmme9mTdGDLj")
+    project = rf.workspace().project("clips-project")
+    model = project.version(1).model
 
     image, svd_img = load_image()
 
