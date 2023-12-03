@@ -96,7 +96,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
 
 
 def predict(model, url):
-    return model.predict(url, confidence=40, overlap=0.7).json()
+    return model.predict(url, confidence=60, overlap=70).json()
     #return model.predict(url, hosted=True).json()
 	
 	
