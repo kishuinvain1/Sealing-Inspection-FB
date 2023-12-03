@@ -56,7 +56,7 @@ def load_image():
         opencv_image_resz = cv2.resize(opencv_image.copy(), (640,640))
         cv2.imwrite("main_image_original.jpg", opencv_image)
         cv2.imwrite("main_image.jpg", opencv_image_resz)
-        st.image("main_image.jpg", caption="svd_image")
+        #st.image("main_image.jpg", caption="svd_image")
        
     return path, opencv_image
        
@@ -88,8 +88,8 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     elif cl == 'nok':
         color = (0,0,255)    
     
-    img = cv2.rectangle(img, start_pnt, end_pnt, color, 3)
-    img = cv2.putText(img, cl, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2, cv2.LINE_AA)	
+    img = cv2.rectangle(img, start_pnt, end_pnt, color, 10)
+    img = cv2.putText(img, cl, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2, cv2.LINE_AA)	
     	
     return img
     
