@@ -111,7 +111,7 @@ def main():
     result = st.button('Detect')
 
     if result:
-        results = predict(model, image)
+        results = predict(model, "main_image.jpg")
         if len(results['predictions']) == 0:
             st.image(svd_img)
             st.write("No Part Detected")
