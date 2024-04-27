@@ -101,10 +101,10 @@ def predict(model, url):
 	
 	
 def main():
-    st.title('Clip Checking')
-    rf = Roboflow(api_key="FFCwPN6Fvmme9mTdGDLj")
-    project = rf.workspace().project("clips-project")
-    model = project.version(1).model
+    st.title('Oring Checking')
+    rf = Roboflow(api_key="ZC9yT7I74cZp86midRjn")
+    project = rf.workspace("viswa-bjrzp").project("oring-go6iu")
+    version = project.version(2)
 
     image, svd_img = load_image()
 
