@@ -107,6 +107,7 @@ def main():
     model = project.version(2).model
 
     image, svd_img = load_image()
+    svd_img = cv2.imread("main_image.jpg")
 
     result = st.button('Detect')
 
@@ -126,7 +127,6 @@ def main():
                 h = results['predictions'][cnt]['height']
                 cl = results['predictions'][cnt]['class']
                 cnf = results['predictions'][cnt]['confidence']
-                svd_img = cv2.imread("main_image.jpg")
                 svd_img = drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
                 
 
