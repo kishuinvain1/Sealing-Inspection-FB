@@ -104,7 +104,7 @@ def main():
     st.title('Oring Checking')
     rf = Roboflow(api_key="ZC9yT7I74cZp86midRjn")
     project = rf.workspace("viswa-bjrzp").project("oring-go6iu")
-    version = project.version(2)
+    model = project.version(2).model
 
     image, svd_img = load_image()
 
