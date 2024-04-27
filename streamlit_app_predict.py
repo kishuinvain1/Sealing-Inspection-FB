@@ -126,6 +126,7 @@ def main():
                 h = results['predictions'][cnt]['height']
                 cl = results['predictions'][cnt]['class']
                 cnf = results['predictions'][cnt]['confidence']
+                svd_img = cv2.imread("main_image.jpg")
                 svd_img = drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
                 
 
