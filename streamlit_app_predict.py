@@ -106,12 +106,12 @@ def main():
     model = project.version(1).model
 
     image, svd_img = load_image()
-    svd_img = cv2.imread("main_image.jpg")
+    svd_img = cv2.imread("main_image_original.jpg")
 
     result = st.button('Detect')
 
     if result:
-        results = predict(model, "main_image.jpg")
+        results = predict(model, "main_image_original.jpg")
         if len(results['predictions']) == 0:
             st.image(svd_img)
             st.write("No Part Detected")
