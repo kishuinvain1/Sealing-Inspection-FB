@@ -97,15 +97,16 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
 
 
 def predict(model, url):
-    return model.predict(url, confidence=60, overlap=70).json()
+    return model.predict(url, confidence=40, overlap=70).json()
     #return model.predict(url, hosted=True).json()
 	
 	
 def main():
-    st.title('Oring Checking')
-    rf = Roboflow(api_key="ZC9yT7I74cZp86midRjn")
-    project = rf.workspace("viswa-bjrzp").project("oring-go6iu")
-    model = project.version(2).model
+    st.title('Sealing-Inspection')
+    
+    rf = Roboflow(api_key="msjchIglbLS9kuq4Lok0")
+    project = rf.workspace("verifygn-jfgxd").project("freudenberg")
+    model = project.version(1).model
 
     image, svd_img = load_image()
     svd_img = cv2.imread("main_image.jpg")
@@ -131,7 +132,7 @@ def main():
                 svd_img = drawBoundingBox(svd_img,x, y, w, h, cl, cnf)
                 
 
-            st.image(svd_img, caption='Resulting Image') 
+            st.image(svd_img, caption='Detection Results') 
 
            
 if __name__ == '__main__':
