@@ -84,10 +84,7 @@ def drawBoundingBox(saved_image ,x, y, w, h, cl, cf):
     start_pnt = (x-w//2-margin,y-h//2-margin)
     end_pnt = (x+w//2+margin, y+h//2+margin)
     txt_start_pnt = (x-w//2-10, y-h//2-30)
-    if cl == 'Ok':
-        color = (0,255,0)
-    elif cl == 'Nok':
-        color = (255,0,0)    
+    color = (255,0,0)
     
     img = cv2.rectangle(img, start_pnt, end_pnt, color, 5)
     #img = cv2.putText(img, cl, txt_start_pnt, cv2.FONT_HERSHEY_SIMPLEX, 2, color, 5, cv2.LINE_AA)	
